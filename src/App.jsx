@@ -3,37 +3,33 @@ import ProductListPage from './ProductListPage';
 import { Routes, Route } from 'react-router-dom';
 import ProductDetail from './ProductDetail';
 import NavBar from './NavBar';
+import Footer from './Footer';
 
 
 function App() {
 	const path = window.location.pathname;
+	// if (!list) {
+	// 	return <div className="justify-between text-center text-6xl p-20 font-bold">loading........</div>
+	// }
+	
 	return (
-		<>
-			{/* <NavBar productCount={totalCount} /> */}
-		<div>
-			<div className="bg-black">
-				<header className='text-4xl text-white pl-20 py-4 font-extrabold '>
-					Amazon
-</header>
+		<div className='bg-gray-300'>
+			<NavBar />
+			<div>
+		
+				<Routes>
+					<Route index element={<ProductListPage />}></Route>
+					<Route path="/products/:id/" element={<ProductDetail />}></Route>
+				</Routes>
 			</div>
-				
-			<Routes>
-				<Route index  element={<ProductListPage />}></Route>
-				<Route path="/products/:sku/" element={<ProductDetail />}></Route>
-				{/* <Route>{NoMatching}</Route> */}
-			</Routes>
+			<Footer />
 		</div>
-		<footer className='bg-black py-5 px-20 text-white flex justify-between '>
-		<div>
-			Copyrighit@2022
-		</div>
-		<div>
-			DESIGN By SAHIL KHAN
-		</div>
+	);
 
-	</footer>
-		</>
-	)
+}
+
+export default App;
+
 
 
 
@@ -131,8 +127,3 @@ function App() {
             
 // 			<ProductList products={data} />
 // 		</div>
-		
-// 	);
-}
-
-export default App;

@@ -1,7 +1,7 @@
 const allData = [
     {
         sku:"1",
-        tittle:"Black Coffee Mugs",
+        title:"Black Coffee Mugs",
         photo: "https://5.imimg.com/data5/SELLER/Default/2020/10/YO/UT/JO/27080277/black-coffee-mug-mockup-500x500.jpg",
         category: "Mugs",
         amount: 20,
