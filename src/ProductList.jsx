@@ -8,7 +8,7 @@ function ProductList({products}){
     <div className="flex flex-wrap sm:felx-col min-w-fit p-3 gap-4 bg-black py-5 gap-x-4   justify-center">
       {products.map(function (item) {
         return (
-        <Product key={item.tittle} {...item} />
+        <Product key={item.id} {...item} />
         // <Product
         // photo={item.photo}
         // category={item.category}

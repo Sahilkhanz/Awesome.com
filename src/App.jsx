@@ -1,28 +1,46 @@
-import React from 'react';
+import React,{useState} from 'react';
 import ProductListPage from './ProductListPage';
 import { Routes, Route } from 'react-router-dom';
 import ProductDetail from './ProductDetail';
 import NavBar from './NavBar';
 import Footer from './Footer';
-
+import NotFound from './No tFound';
 
 function App() {
-	const path = window.location.pathname;
-	// if (!list) {
-	// 	return <div className="justify-between text-center text-6xl p-20 font-bold">loading........</div>
-	// }
+	const savedDataString = localStorage.getItem("my-cart") || "{}"; 
+	const savedData = JSON.parse(savedDataString)
+	const [cart, setCart] = useState(savedData);
+	// const [totalCount, setTotalCount] = useState(0);
+	
+	function handleAddToCart(productId, count) {
+		// console.log("App.jsx", productId, count);
+		// setTotalCount(totalCount + count)
+		// 	;
+		const oldCount = cart[productId] || 0 ;
+
+		const newCart={...cart , [productId]: oldCount + count}
+	  
+		setCart(newCart);
+		const cartString = JSON.stringify(newCart);
+		localStorage.setItem("my-cart",cartString)
+	};
+	const totalCount = Object.keys(cart).reduce(function (output, current) {
+		return output + cart[current];
+	}, 0);
+	
 	
 	return (
-		<div className='bg-gray-300'>
-			<NavBar />
-			<div>
+		<div className='bg-gray-300 min-w-fit'>
+			<NavBar productCount={totalCount} />
+			<div >
 		
 				<Routes>
 					<Route index element={<ProductListPage />}></Route>
-					<Route path="/products/:id/" element={<ProductDetail />}></Route>
+					<Route path="/products/:id/" element={<ProductDetail onAddToCart={handleAddToCart} />}></Route>
+					<Route  path="*" element={<NotFound/>}></Route>
 				</Routes>
 			</div>
-			<Footer />
+			<Footer className='justify-last'/>
 		</div>
 	);
 
